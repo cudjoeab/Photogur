@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+    <ul>
+        {% for picture in pictures%}
+            <a href="{% url 'picture_details' id=picture.pk %}">           
+                <li>    
+                <h4>{{ picture.title }} </h4> 
+                <img src="{{ picture.url }}" alt= "{{ picture.title }}">
+                <p> {{ picture.artist }} </p>
+                <p>
+                    {{ picture.comments.count }} Comments 
+                </p>
+            
+            </li>
+            </a>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+{% endblock %}

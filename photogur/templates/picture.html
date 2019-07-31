@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ picture.title }}</h2>
+<h2>By {{picture.artist }}</h2>
+
+<img src="{{ picture.url }}" alt="{{picture.title }}"/>
+
+<!-- showing the comments below a picture -->
+
+<h3>Comments:</h3>
+<ul>
+    {% for comment in picture.comments.all %}
+    <li>{{ comment.name }} : {{ comment.message }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

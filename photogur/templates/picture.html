@@ -15,4 +15,16 @@
     {% endfor %}
 </ul>
 
+<form action="{% url 'create_comment' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="picture" value="{{ picture.pk }}"/>
+    Name: <br>
+    <input type="text" name="name"/><br>
+    Comment: <br>
+    <input type="text" name="message"/><br>
+    <input type="submit" value="Post"/>
+
+
+</form>
+
 {% endblock %}

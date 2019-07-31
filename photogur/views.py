@@ -26,5 +26,21 @@ def picture_search(request):
     response = render(request,'search_results.html', context)
     return HttpResponse(response)
 
+def create_comment(request):
+    picture_id = request.POST['picture']
+    picture = Picture.objects.get(id=picture_id)
+    new_comment = Comment()
+    new_comment.name = request.POST['name']
+    new_comment.message = request.POST['message']
+    new_comment.picture = picture
+    new_comment.save()
+    context = {'picture': picture}
+    response = render(request, 'picture.html', context)
+    return HttpResponse(response)
+
+
+
+     
+
 
 

@@ -1,8 +1,9 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render 
 from photogur.models import Picture, Comment
-from photogur.forms import LoginForm
-from django.contrib.auth import logout
+from photogur.forms import LoginForm, PictureForm
+from django.contrib.auth import login, logout, authenticate
+ 
 from django.contrib.auth.forms import UserCreationForm
 
 # def root_path(request):
@@ -10,24 +11,30 @@ from django.contrib.auth.forms import UserCreationForm
 
 def pictures(request):
     pictures = Picture.objects.all() 
-    context = {'pictures': pictures}
-    response = render(request, 'pictures.html', context)
-    return HttpResponse(response)
+    return render(request, 'pictures.html', {
+        'pictures': pictures
+    })
 
 def picture_show(request, id):
     picture = Picture.objects.get(pk=id)
-    context = {'picture': picture} 
-    response = render(request, 'picture.html', context)
-    return HttpResponse(response)
+    return  render(request, 'picture.html', {
+        'picture': picture
+    })
 
 def picture_search(request):
     query = request.GET['query']
     search_results = Picture.objects.filter(artist=query)
-    context = {'pictures': search_results,
-               'query': query,
-    }
-    response = render(request,'search_results.html', context)
-    return HttpResponse(response)
+   
+    return render(request,'search_results.html', {
+        'pictures': search_results,
+        'query': query,
+    })
+
+def new_picture(request):
+    form=PictureForm()
+    return render(request, 'new_picture_form.html', {
+        'form': form
+    })
 
 def create_comment(request):
     picture_id = request.POST['picture']
@@ -37,21 +44,32 @@ def create_comment(request):
     new_comment.message = request.POST['message']
     new_comment.picture = picture
     new_comment.save()
-    context = {'picture': picture}
-    response = render(request, 'picture.html', context)
-    return HttpResponse(response)
+
+    return render(request, 'picture.html', {'picture': picture})
 
 def login_view(request):
-    form = LoginForm()
-    context = {'form': form}
-    http_response = render(request, 'login.html', context)
-    return HttpResponse(http_response)
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            pw = form.cleaned_data['password']
+            user = authenticate(username=username, password=pw)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/pictures')
+            else:
+                form.add_error('username', 'Login failed')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {
+        'form': form
+    })
 
 
 def logout_view(request):
     logout(request)
-    context = {"pictures": pictures}
-    return HttpResponse(request, 'pictures.html', context)
+    return HttpResponseRedirect('/')
 
 def signup(request):
     if request.method == 'POST':
@@ -65,8 +83,10 @@ def signup(request):
             return HttpResponseRedirect('pictures')
     else: 
         form = UserCreationForm()
-    html_response = render(request, 'signup.html', {'form': form})
-    return HttpResponse(html_response)
+        
+    return render(request, 'signup.html', {
+        'form': form
+    })
 
 
 

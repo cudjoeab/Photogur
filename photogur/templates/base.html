@@ -16,9 +16,10 @@
         <h1> PhotoGur</h1>
         {% if request.user.is_authenticated %}
         <p>Welcome {{ request.user.username }}</p>
-        <p><a href="{% url 'homepage' %}">logout</a></p>
+        <p></p><a href="{% url 'logout' %}">logout</a></p>
+        <a href="{% url 'new_picture' %}">submit a photo</a>
         {% else %}
-        <p><a href="{% url 'login' %}"> login</a></p>
+        <p><a href="{% url 'signup' %}"> signup </a><a href="{% url 'login' %}"> login </a></p>
         
         {% endif %}
         <form action="{% url 'picture_search'%}" method="get">

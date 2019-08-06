@@ -14,3 +14,5 @@ class Comment(models.Model):
     message = models.TextField()
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE, related_name='comments')
 
+
+

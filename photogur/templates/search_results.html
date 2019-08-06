@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Search results: {{ pictures.count }}</h2>
 
-<main>
+
+<section class="results">
+<h2>Search results: {{ pictures.count }}</h2> 
+</section>  
 {% for picture in pictures %}
+<main>
 <ul>
     <li>
         <img src="{{ picture.url }}" alt= "{{ picture.title }}">
     </li>
-    <li>
+    <li class="description">
         <em> {{picture.title }}</em> by {{picture.artist }}
     </li>
 </ul>

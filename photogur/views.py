@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render 
+from django.shortcuts import render, redirect
 from photogur.models import Picture, Comment
 from photogur.forms import LoginForm, PictureForm
 from django.contrib.auth import login, logout, authenticate
@@ -31,10 +31,18 @@ def picture_search(request):
     })
 
 def new_picture(request):
-    form=PictureForm()
-    return render(request, 'new_picture_form.html', {
+    form = PictureForm(request.POST)
+    if form.is_valid():
+        new_picture = form.save(commit=False)
+        new_picture.user = request.user
+        new_picture.save()
+        return redirect('pictures')
+    else:
+        return render(request, 'new_picture_form.html', {
         'form': form
     })
+
+
 
 def create_comment(request):
     picture_id = request.POST['picture']

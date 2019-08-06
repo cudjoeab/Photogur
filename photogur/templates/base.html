@@ -13,9 +13,9 @@
 </head>
 <body>
     <header class= "info"> 
-        <h1> PhotoGur</h1>
+        <h1><a href="{% url 'pictures' %}">PhotoGur</a></h1>
         {% if request.user.is_authenticated %}
-        <p>Welcome {{ request.user.username }}</p>
+        <h3>Welcome {{ request.user.username }} !</h3>
         <p></p><a href="{% url 'logout' %}">logout</a></p>
         <a href="{% url 'new_picture' %}">submit a photo</a>
         {% else %}

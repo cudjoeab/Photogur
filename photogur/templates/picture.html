@@ -3,6 +3,8 @@
 {% block content %}
 <h2>{{ picture.title }}</h2>
 <h2>By {{picture.artist }}</h2>
+<h3> Posted by: {{ picture.user.username }}</h3>
+
 
 <img src="{{ picture.url }}" alt="{{picture.title }}"/>
 

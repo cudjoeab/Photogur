@@ -26,6 +26,7 @@ urlpatterns = [
     path('pictures/', views.pictures, name = 'pictures'), 
     path('pictures/<int:id>', views.picture_show, name='picture_details'),
     path('pictures/<int:id>/edit', views.edit_picture, name ='edit_picture'),
+    path('pictures/<int:id>/delete', views.delete_picture, name='delete_picture'),
     path('pictures/new', views.new_picture, name="new_picture"),
     path('search', views.picture_search, name='picture_search'),
     path('signup/', views.signup, name='signup'),

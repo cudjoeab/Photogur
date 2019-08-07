@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photogur.models import Picture, Comment
 from photogur.forms import LoginForm, PictureForm
 from django.contrib.auth import login, logout, authenticate
@@ -62,9 +62,11 @@ def edit_picture(request, id):
             context = { 'form': form, 'picture': picture }
             return render(request, 'edit_picture_form.html', context) 
 
-    
-
-
+@login_required
+def delete_picture(request, id):
+    picture = Picture.objects.get(pk=id) 
+    picture.delete() 
+    return redirect(reverse('pictures'))
 
 
 
@@ -79,6 +81,12 @@ def create_comment(request):
     new_comment.save()
 
     return render(request, 'picture.html', {'picture': picture})
+
+@login_required
+def delete(request, id): 
+    comment = Comment.objects.get(pk=id) 
+    comment.delete() 
+    return redirect(reverse('pictures'))
 
 def login_view(request):
     if request.method == 'POST':

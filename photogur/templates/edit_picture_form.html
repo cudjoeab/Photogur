@@ -1,1 +1,7 @@
-<p> this is the edit picture form for picture {{ picture.id}}</p>
+{% extends 'base.html' %}
+{% block content %} 
+<form action="{% url 'edit_picture' picture.id %}" method='post'> 
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="submit" value="Submit" > 
+{% endblock %}

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from photogur.models import Picture, Comment
 from photogur.forms import LoginForm, PictureForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
  
 from django.contrib.auth.forms import UserCreationForm
 
@@ -30,6 +31,7 @@ def picture_search(request):
         'query': query,
     })
 
+@login_required
 def new_picture(request):
     form = PictureForm(request.POST)
     if form.is_valid():
@@ -43,7 +45,7 @@ def new_picture(request):
     })
 
 
-
+@login_required
 def create_comment(request):
     picture_id = request.POST['picture']
     picture = Picture.objects.get(id=picture_id)

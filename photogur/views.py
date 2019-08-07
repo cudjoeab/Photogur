@@ -64,7 +64,7 @@ def edit_picture(request, id):
 
 @login_required
 def delete_picture(request, id):
-    picture = Picture.objects.get(pk=id) 
+    picture = get_object_or_404(Picture, pk=id, user=request.user.pk)
     picture.delete() 
     return redirect(reverse('pictures'))
 
@@ -121,7 +121,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return HttpResponseRedirect('pictures')
+            return HttpResponseRedirect('/')
     else: 
         form = UserCreationForm()
         

@@ -1,12 +1,6 @@
 /* Color scheme */
 
 /* 
-turquoise blue: 
-#6CDAE7
-RGB: 108, 218, 231
-apricot: 
-#E7836C
-RGB: 231, 131, 108
 silver chalice: 
 #AAA7A7
 RGB: 170, 167, 167
@@ -15,18 +9,19 @@ RGB: 170, 167, 167
 header{
     font-family: 'Open Sans', sans-serif;
     font: 'Roboto'; 
-    background: #AAA7A7; 
+    background: rgba(118, 123, 145, 1);
     padding: 20px 10px 0px 10px; 
     color: white; 
+    margin-bottom: 20px; 
 }
-
 
 
 body {
-    background: #aaa7a7; 
+    background: rgba(118, 123, 145, 1); 
     margin: 0 auto; 
     
 }
+
 img {
     max-width: 100%; 
 }
@@ -43,7 +38,7 @@ footer{
     text-align: center; 
     padding-bottom: 20px;
     font-weight: 400;
-    background-color: #666864; 
+    background-color: rgba(42, 50, 75, 1);
     font-family: 'Open Sans', sans-serif;
     font: 'Roboto';  
     padding: 20px 10px 10px 10px; 
@@ -51,7 +46,7 @@ footer{
     color: white; 
 }
 
-ul {
+.pictures {
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
     grid-template-rows: 1fr 1fr; 
@@ -68,23 +63,66 @@ li {
     list-style-type: none;
     padding: 0px 5px; 
     max-height: 100%; 
-    max-width: 100%; 
-   
+    max-width: 100%;   
 }
-
-
 
 a {
     text-decoration: none;
-    border: solid white 3px; 
+    border: solid rgba(225, 229, 238, 1) 3px; 
     padding: 0.5em; 
-    color: white; 
+    color: rgba(225, 229, 238, 1); 
 
 }
+
+.actionlinks {
+    margin: .2em; 
+
+}
+a:hover.actionlinks {
+    border: solid rgba(42, 50, 75, 1) 3px; 
+    max-width: 50%;
+    margin: 0 auto; 
+}
+
+
+.pagelinks{
+    border: none;
+
+}
+a:hover.pagelinks { 
+    color: rgba(247, 197, 159, 1); 
+    font-weight: bold; 
+}
+
 a:visited {
     
     text-decoration: none; 
-    color: white; 
+    color: rgba(225, 229, 238, 1);
+}
+/* styling for picture.html */
+.picture {
+    border:  rgba(42, 50, 75, 1) solid 5px; 
+    margin: 0 auto;
+    max-width: 50%;
+    padding: 15px 15px 5px 15px; 
+    color: rgba(42, 50, 75, 1);
+
+}
+.comments {
+    font-family: 'Merriweather', serif;
+    font: 'Merriweather'; 
+    color: rgb(28, 33, 49);
+    text-decoration: none;  
+    list-style-type: none;
+    padding: 1em; 
+    max-height: 100%; 
+    max-width: 100%;   
+
+}
+.singlecomment {
+    padding: 0.5em;
+    border-bottom: rgba(247, 197, 159, 1) dashed 2px; 
+    max-width: 30%;
 }
 
 /* RESPONSIVE */

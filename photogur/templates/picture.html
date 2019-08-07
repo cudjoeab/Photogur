@@ -1,37 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="picture">
 <h2>{{ picture.title }}</h2>
 <h2>By {{picture.artist }}</h2>
 <h3> Posted by: {{ picture.user.username }}</h3>
-
-
 <img src="{{ picture.url }}" alt="{{picture.title }}"/>
+
+
 {%if request.user.is_authenticated %}
-    <h4><a href= "{% url 'edit_picture' id=picture.pk %}">edit</a></h4>
-    <h4><a href= "{% url 'delete_picture' id=picture.pk %}">delete</a></h4> 
+    <h4>
+        <a href= "{% url 'edit_picture' id=picture.pk %}"class="actionlinks">edit</a>
+        <a href= "{% url 'delete_picture' id=picture.pk %}"class="actionlinks">delete</a>
+    </h4> 
     
 {% endif %}
+</section>
+
 
 <!-- showing the comments below a picture -->
+<section class="comments">
+    <h3>Comments:</h3>
+    <ul>
+        {% for comment in picture.comments.all %}
+        <li class="singlecomment">{{ comment.name }} : {{ comment.message }}</li>
+        {% endfor %}
+    </ul>
 
-<h3>Comments:</h3>
-<ul>
-    {% for comment in picture.comments.all %}
-    <li>{{ comment.name }} : {{ comment.message }}</li>
-    {% endfor %}
-</ul>
+    <form action="{% url 'create_comment' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="picture" value="{{ picture.pk }}"/>
+        Name: <br>
+        <input type="text" name="name"/><br>
+        Comment: <br>
+        <input type="text" name="message"/><br>
+        <input type="submit" value="Post"/>
 
-<form action="{% url 'create_comment' %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="picture" value="{{ picture.pk }}"/>
-    Name: <br>
-    <input type="text" name="name"/><br>
-    Comment: <br>
-    <input type="text" name="message"/><br>
-    <input type="submit" value="Post"/>
-
-
-</form>
-
+    </form>
+</section>
 {% endblock %}

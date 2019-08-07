@@ -2,7 +2,7 @@
 
 {% block content %}
 <body>
-    <ul>
+    <ul class="pictures">
         {% for picture in pictures%}
             <a href="{% url 'picture_details' id=picture.pk %}">           
                 <li>    

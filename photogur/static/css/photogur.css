@@ -13,12 +13,20 @@ header{
     padding: 20px 10px 0px 10px; 
     color: white; 
     margin-bottom: 20px; 
+    display: inline;
+}
+
+h1 {
+    margin-top: 0; 
+    margin-bottom: 0; 
 }
 
 
 body {
     background: rgba(118, 123, 145, 1); 
     margin: 0 auto; 
+    font-family: 'Open Sans', sans-serif;
+    font: 'Roboto'; 
     
 }
 
@@ -31,7 +39,6 @@ main {
     margin: 0 auto;
     margin-bottom: 10px; 
 }
-
 
 
 footer{
@@ -74,6 +81,7 @@ a {
     text-decoration: none;
     border: solid rgba(225, 229, 238, 1) 3px; 
     padding: 0.5em; 
+    margin-right: 30px; 
     color: rgba(225, 229, 238, 1); 
 
 }
@@ -88,11 +96,10 @@ a:hover.actionlinks {
     margin: 0 auto; 
 }
 
-
 .pagelinks{
     border: none;
-
 }
+
 a:hover.pagelinks { 
     color: rgba(247, 197, 159, 1); 
     font-weight: bold; 

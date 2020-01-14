@@ -16,4 +16,3 @@ If you do not have an image link on hand, you can use [this one](https://i.picsu
     _NB: To change the stock image, simply change the id number (the three digit number after '/id/'). For instance, our link above has an ID of 123, try changing it to 456 and see what is generated!_ 
 
 [Try it yourself!](https://cudjoeab-photogur.herokuapp.com/pictures/)
-
